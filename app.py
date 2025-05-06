@@ -41,6 +41,14 @@ def hodimni_qoshish(ism, familiya, lavozim, yoshi, jinsi):
             cursor.execute("INSERT INTO hodimlar(ism, familiya, lavozim, yoshi, jinsi) VALUES (%s, %s, %s, %s, %s)", (ism, familiya, lavozim, yoshi, jinsi))
             conn.commit()
 
+def hodim_statistika():
+    with get_connection() as conn:
+        with conn.cursor() as cursor:
+            cursor.execute("SELECT COUNT(*) FROM hodimlar")
+            count = cursor.fetchone()[0]
+            return count
+        
+
 app = Flask("test")
 
 @app.route('/delete/<int:id>')
