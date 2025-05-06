@@ -49,6 +49,12 @@ def hodim_statistika():
             return count
         
 
+def hodimni_ozgartirish(id, ism, familiya, lavozim, yoshi, jinsi):
+    with get_connection() as conn:
+        with conn.cursor() as cursor:
+            cursor.execute("UPDATE hodimlar SET ism=%s, familiya=%s, lavozim=%s, yoshi=%s, jinsi=%s WHERE id=%s", (ism, familiya, lavozim, yoshi, jinsi, id))
+            conn.commit()
+
 app = Flask("test")
 
 @app.route('/delete/<int:id>')
