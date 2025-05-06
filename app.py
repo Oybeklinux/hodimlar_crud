@@ -41,6 +41,12 @@ def hodimni_qoshish(ism, familiya, lavozim, yoshi, jinsi):
             cursor.execute("INSERT INTO hodimlar(ism, familiya, lavozim, yoshi, jinsi) VALUES (%s, %s, %s, %s, %s)", (ism, familiya, lavozim, yoshi, jinsi))
             conn.commit()
 
+def hodimni_ozgartirish(id, ism, familiya, lavozim, yoshi, jinsi):
+    with get_connection() as conn:
+        with conn.cursor() as cursor:
+            cursor.execute("UPDATE hodimlar SET ism=%s, familiya=%s, lavozim=%s, yoshi=%s, jinsi=%s WHERE id=%s", (ism, familiya, lavozim, yoshi, jinsi, id))
+            conn.commit()
+
 app = Flask("test")
 
 @app.route('/delete/<int:id>')
